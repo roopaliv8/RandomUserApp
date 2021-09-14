@@ -3,5 +3,5 @@ export * from './details_screen/details_screen';
 
 export type RootStackParamList = {
     Main: undefined;
-    Details: undefined;
+    Details: { email: string };
     };

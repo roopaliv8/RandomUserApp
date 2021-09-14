@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  image: { width: 100, height: 100 },
+  image: { width: 80, height: 80 },
   currentTemp: {
     textAlign: 'center',
     fontSize: 60,

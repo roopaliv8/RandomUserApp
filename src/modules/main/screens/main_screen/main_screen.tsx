@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { Text, AppLayout } from '@core/components';
 import { styles } from './main_screen.styles';
 import { CardItems, ViewMoreItems } from './components';
-import { FlatList } from 'react-native';
+import { Alert, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, saveData } from '@app/redux';
+import { RootState, saveData, saveDetailsData } from '@app/redux';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import { RootStackParamList } from '..';
@@ -14,13 +14,13 @@ type authScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
 
 export default function MainScreen ({ }) {
   const navigation = useNavigation<authScreenProp>();
+  const usersCount=100;
 
   const dispatch = useDispatch();
   const { posts } = useSelector((state: RootState) => state.feed)
-  console.log(posts.results)
-  const items = posts.results.slice(0, 5)
+  const items = posts.results
   useEffect(() => {
-    dispatch(saveData())
+    dispatch(saveData(usersCount))
   }, []);
   if (posts.results.length === 0) {
     return (
@@ -29,19 +29,19 @@ export default function MainScreen ({ }) {
       </AppLayout>
     );
   }
-  const toggleUnit = (): void => {
-    navigation.navigate('Details')
-  };
+  function toggleUnit(data:UserDataInterface): void {
+    dispatch(saveDetailsData(data))
+    navigation.navigate('Details', { email: data.email});
+  }
 
   return (
     <AppLayout>
       <FlatList<UserDataInterface>
-        keyExtractor={(_item, index) => index.toString()}
-        renderItem={({ item }) => <CardItems data={item} />}
+        keyExtractor={(_item, index) => _item.email}
+        renderItem={({ item }) => <CardItems data={item}
+        toggleUnit={toggleUnit} />}
         data={items}
       />
-      <ViewMoreItems
-        toggleUnit={toggleUnit} />
     </AppLayout>
   );
 };

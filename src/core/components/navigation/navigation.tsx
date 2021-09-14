@@ -9,7 +9,9 @@ export default function MyStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Main" component={MainScreen} />
-      <Stack.Screen name="Details" component={DetailsScreen} />
+      <Stack.Screen name="Details" component={DetailsScreen} initialParams={
+        { email: '' }
+      }/>
     </Stack.Navigator>
   );
 }

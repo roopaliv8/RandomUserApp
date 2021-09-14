@@ -1,19 +1,18 @@
 import React from 'react';
 import { Text, View, Card, TouchableOpacity } from '@core/components';
-import { styles } from './card_item.styles';
 import { UserDataInterface, UserInterface } from '@app/redux/types';
 import { Image } from 'react-native';
+import { styles } from '../../main_screen/components/card_item/card_item.styles';
 
 interface Props {
   data: UserDataInterface;
-  toggleUnit: (data: UserDataInterface) => void;
 }
 
 export const CardItems = (props: Props): JSX.Element => {
-  const { data, toggleUnit } = props;
+  const { data } = props;
   return (
     <View style={styles.layout}>
-      <Card style={styles.card} onPress={() => { toggleUnit(data) }}>
+      <Card style={styles.card} >
         <View style={styles.row}>
       <Image
       style={styles.image}
