@@ -6,8 +6,8 @@ import axios from 'axios'
 import { config } from '@core/config';
 import { all, call, put, takeLatest } from "redux-saga/effects";
 
-export const loadUsers = () => {
-  return { type: SAVE_DATA_SUCCESS };
+export const loadUsers = (payload: any) => {
+  return { type: SAVE_DATA_SUCCESS, payload };
 };
 
 const saveDataSuccess: ActionCreator<FeedActionTypes> = (posts: UserInterface) => {
@@ -18,12 +18,12 @@ export const loadDetial = (payload: UserDataInterface) => {
   return { type: SAVE_DETAILS_DATA, payload };
 };
 
-const saveData = () => axios.get(`${config.serverUrl}/api/?results=10`);
+const saveData = (count: number) => axios.get(`${config.serverUrl}/api/?results=${count}`);
 
-function* saveDataSaga() {
+function* saveDataSaga({ payload }: any) {
   yield put(request());
   try {
-    const { data } = yield call(saveData);
+    const { data } = yield call(saveData, payload);
     yield put(saveDataSuccess(data))
   } catch (e) {
     yield put(failure('Server error.'))

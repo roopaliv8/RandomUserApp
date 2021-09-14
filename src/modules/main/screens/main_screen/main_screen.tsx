@@ -14,11 +14,12 @@ type authScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
 
 export default function MainScreen({ }) {
   const navigation = useNavigation<authScreenProp>();
+  const count=100
 
   const dispatch = useDispatch();
   const { posts } = useSelector((state: RootState) => state.feed)
   useEffect(() => {
-    dispatch(loadUsers())
+    dispatch(loadUsers(count))
   }, []);
   if (posts?.results?.length === 0) {
     return (
