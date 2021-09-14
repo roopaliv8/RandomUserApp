@@ -32,6 +32,8 @@ export interface UserInterface {
 export const SAVE_DATA = "SAVE_DATA"
 export const SAVE_DETAILS_DATA = "SAVE_DETAILS_DATA"
 
+export const SAVE_DATA_SUCCESS = "SAVE_DATA_SUCCESS"
+
 interface SaveDataAction {
     type: typeof SAVE_DATA,
     payload: UserInterface
