@@ -1,4 +1,5 @@
 import moment from 'moment';
+import {config} from '@core/config'
 
 export const dateDiffrence = (date: string): string => {
 
@@ -19,7 +20,7 @@ export const dateDiffrence = (date: string): string => {
   else {
     let dateObj = new Date(date);
     let momentObj = moment(dateObj);
-    return momentObj.format('MMMM DD, YYYY');
+    return momentObj.format(config.dateFormat);
   }
 }
 

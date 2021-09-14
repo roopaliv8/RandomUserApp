@@ -1,4 +1,4 @@
 export const config = {
-  dateFormat: 'DD/MM/YYYY',
+  dateFormat: 'MMMM DD, YYYY',
   serverUrl:'https://randomuser.me'
 };
